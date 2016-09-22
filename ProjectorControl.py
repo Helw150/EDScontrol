@@ -56,6 +56,7 @@ class device_handler(debounce_handler):
             if(state == True):
                 subprocess.call(['git pull'], shell=True)
                 exit
+                print "Fail"
             elif(state == False):
                 print "Figure out what to do with this"
         return True
