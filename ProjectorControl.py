@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """ fauxmo_minimal.py - Fabricate.IO
 
     This is a demo python file showing what can be done with the debounce_handler.
@@ -16,7 +17,9 @@ import fauxmo
 import logging
 import time
 import serial
-import git
+import subprocess
+import os
+import sys
 
 from debounce_handler import debounce_handler
 logging.basicConfig(level=logging.DEBUG)
@@ -48,6 +51,12 @@ class device_handler(debounce_handler):
             elif (state == False):
                 command = convertHex(OffCommand)
                 serialConnection.write(command)
+        if(name == "git"):
+            if(state == True):
+                subprocess.call(['git pull'], shell=True)
+                exit
+            elif(state == False):
+                print "Figure out what to do with this"
         return True
 
 if __name__ == "__main__":
