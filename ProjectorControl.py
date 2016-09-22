@@ -41,7 +41,7 @@ class device_handler(debounce_handler):
     """Publishes the on/off state requested,
        and the IP address of the Echo making the request.
     """
-    TRIGGERS = {"projector": 52000, "volume": 53000, "git": 54000}
+    TRIGGERS = {"projector": 52000, "speakers": 53000, "git": 54000}
 
     def act(self, client_address, name, state):
         print "Name", name, "State", state, "from client @", client_address
@@ -59,8 +59,8 @@ class device_handler(debounce_handler):
             elif(state == False):
                 print "Figure out what to do with this"
         return True
-        if(name == "volume"):
-            y = yamaha.Yamaha("192.168.10.108", "50000")
+        if(name == "speakers"):
+            y = yamaha.Yamaha("192.168.10.108", "80")
             if(state == True):
                 print y.put("PWR", "On")
             elif(state == False):
