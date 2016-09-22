@@ -20,6 +20,7 @@ import serial
 import subprocess
 import os
 import sys
+import yamaha
 
 from debounce_handler import debounce_handler
 logging.basicConfig(level=logging.DEBUG)
@@ -40,7 +41,7 @@ class device_handler(debounce_handler):
     """Publishes the on/off state requested,
        and the IP address of the Echo making the request.
     """
-    TRIGGERS = {"projector": 52000, "sound": 53000, "git": 54000}
+    TRIGGERS = {"projector": 52000, "volume": 53000, "git": 54000}
 
     def act(self, client_address, name, state):
         print "Name", name, "State", state, "from client @", client_address
@@ -58,6 +59,12 @@ class device_handler(debounce_handler):
             elif(state == False):
                 print "Figure out what to do with this"
         return True
+        if(name == "volume"):
+            y = yamaha.Yamaha("192.168.10.108", "50000")
+            if(state == True):
+                print y.send("MAIN", "PWR", "On")
+            elif(state == False):
+                print y.send("MAIN", "PWR", "Standby")
 
 if __name__ == "__main__":
     # Startup the fauxmo server

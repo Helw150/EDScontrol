@@ -6,7 +6,7 @@ import socket, getopt, sys
 unit = "MAIN"
 
 # default hostname and port
-hostname = "av"
+hostname = "192.168.10.108"
 port = "50000"
 
 class YamahaException(Exception):
