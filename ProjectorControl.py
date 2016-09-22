@@ -45,7 +45,6 @@ class device_handler(debounce_handler):
 
     def act(self, client_address, name, state):
         print "Name", name, "State", state, "from client @", client_address
-        print "CHECK"
         if(name == "projector"):
             if(state == True):
                 command = convertHex(OnCommand)
@@ -56,8 +55,7 @@ class device_handler(debounce_handler):
         if(name == "git"):
             if(state == True):
                 subprocess.call(['git pull'], shell=True)
-                exit
-                print "Fail"
+                exit()
             elif(state == False):
                 print "Figure out what to do with this"
         return True
