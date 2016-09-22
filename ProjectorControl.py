@@ -62,9 +62,9 @@ class device_handler(debounce_handler):
         if(name == "volume"):
             y = yamaha.Yamaha("192.168.10.108", "50000")
             if(state == True):
-                print y.send("MAIN", "PWR", "On")
+                print y.put("PWR", "On")
             elif(state == False):
-                print y.send("MAIN", "PWR", "Standby")
+                print y.put("PWR", "On/Off")
 
 if __name__ == "__main__":
     # Startup the fauxmo server
