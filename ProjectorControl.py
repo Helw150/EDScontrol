@@ -20,7 +20,7 @@ import serial
 import subprocess
 import os
 import sys
-import yamaha
+import rxv
 
 from debounce_handler import debounce_handler
 logging.basicConfig(level=logging.DEBUG)
@@ -60,11 +60,11 @@ class device_handler(debounce_handler):
                 print "Figure out what to do with this"
         return True
         if(name == "speakers"):
-            y = yamaha.Yamaha("192.168.10.108", "80")
+            rx = rxv.RXV("", "RX-A830")
             if(state == True):
-                print y.put("PWR", "On")
+                rx.on = True
             elif(state == False):
-                print y.put("PWR", "On/Off")
+                rx.oon = False
 
 if __name__ == "__main__":
     # Startup the fauxmo server
