@@ -29,6 +29,7 @@ serialConnection = serial.Serial("/dev/ttyUSB0", 115200)
 global OnCommand, OffCommand
 OnCommand = "0614000400341100005D"
 OffCommand = "0614000400341101005E"
+
 def convertHex(command):
     output = ''
     while command:
@@ -41,7 +42,7 @@ class device_handler(debounce_handler):
     """Publishes the on/off state requested,
        and the IP address of the Echo making the request.
     """
-    TRIGGERS = {"projector": 52000, "speakers": 53000, "git": 54000, "HDMI":55000}
+    TRIGGERS = {"projector": 52000, "speakers": 53000, "git": 54000, "input":55000}
 
     def act(self, client_address, name, state):
         print "Name", name, "State", state, "from client @", client_address
@@ -64,12 +65,14 @@ class device_handler(debounce_handler):
                 rx.on = True
             elif(state == False):
                 rx.on = False
-        if(name == "HDMI"):
+        if(name == "input"):
             rx = rxv.RXV("http://dentw04tc-c-107.dental.nyu.edu/YamahaRemoteControl/ctrl", "RX-A830")
+            Inputs = [i for i in rx.inputs]
+            i = Inputs.index(rx.input)
             if(state == True):
-                rx.input = "HDMI1"
+                rx.input = Inputs[i+1]
             elif(state == False):
-                rx.input = "AirPlay"    
+                rx.input = Inputs[i-1]
         return True
 
 if __name__ == "__main__":
