@@ -41,7 +41,7 @@ class device_handler(debounce_handler):
     """Publishes the on/off state requested,
        and the IP address of the Echo making the request.
     """
-    TRIGGERS = {"projector": 52000, "speakers": 53000, "git": 54000}
+    TRIGGERS = {"projector": 52000, "speakers": 53000, "git": 54000, "HDMI":55000}
 
     def act(self, client_address, name, state):
         print "Name", name, "State", state, "from client @", client_address
@@ -58,13 +58,16 @@ class device_handler(debounce_handler):
                 exit()
             elif(state == False):
                 print "Figure out what to do with this"
-        return True
         if(name == "speakers"):
             rx = rxv.RXV("", "RX-A830")
             if(state == True):
                 rx.on = True
             elif(state == False):
-                rx.oon = False
+                rx.on = False
+        if(name == "HDMI"):
+            
+                    
+        return True
 
 if __name__ == "__main__":
     # Startup the fauxmo server
