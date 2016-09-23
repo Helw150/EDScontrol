@@ -59,14 +59,17 @@ class device_handler(debounce_handler):
             elif(state == False):
                 print "Figure out what to do with this"
         if(name == "speakers"):
-            rx = rxv.RXV("", "RX-A830")
+            rx = rxv.RXV("http://dentw04tc-c-107.dental.nyu.edu/YamahaRemoteControl/ctrl", "RX-A830")
             if(state == True):
                 rx.on = True
             elif(state == False):
                 rx.on = False
         if(name == "HDMI"):
-            
-                    
+            rx = rxv.RXV("http://dentw04tc-c-107.dental.nyu.edu/YamahaRemoteControl/ctrl", "RX-A830")
+            if(state == True):
+                rx.input = "HDMI1"
+            elif(state == False):
+                rx.input = "AIRPLAY"    
         return True
 
 if __name__ == "__main__":
