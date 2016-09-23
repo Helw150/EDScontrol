@@ -67,7 +67,7 @@ class device_handler(debounce_handler):
                 rx.on = False
         if(name == "input"):
             rx = rxv.RXV("http://dentw04tc-c-107.dental.nyu.edu/YamahaRemoteControl/ctrl", "RX-A830")
-            Inputs = [i for i in rx.inputs]
+            Inputs = [i for i in rx.inputs()]
             i = Inputs.index(rx.input)
             if(state == True):
                 rx.input = Inputs[i+1]
