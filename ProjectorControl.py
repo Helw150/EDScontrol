@@ -70,9 +70,17 @@ class device_handler(debounce_handler):
             Inputs = [i for i in rx.inputs()]
             i = Inputs.index(rx.input)
             if(state == True):
-                rx.input = Inputs[i+1]
+                if (Inputs[i] == Inputs[-1]):
+                    rx.input = Inputs[0]
+                else:
+                    rx.input = Inputs[i+1]
+                i += 1
             elif(state == False):
-                rx.input = Inputs[i-1]
+                if (i == 0):
+                    rx.input = Inputs[-1]
+                else:
+                    rx.input = Inputs[i-1]
+                i += 1
         return True
 
 if __name__ == "__main__":
