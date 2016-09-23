@@ -69,7 +69,7 @@ class device_handler(debounce_handler):
             if(state == True):
                 rx.input = "HDMI1"
             elif(state == False):
-                rx.input = "AIRPLAY"    
+                rx.input = "AirPlay"    
         return True
 
 if __name__ == "__main__":
