@@ -50,9 +50,13 @@ class device_handler(debounce_handler):
             if(state == True):
                 command = convertHex(OnCommand)
                 serialConnection.write(command)
+                rx.input = "HDMI1"
+                rx.volume = -10
             elif (state == False):
                 command = convertHex(OffCommand)
                 serialConnection.write(command)
+                rx.input = "AirPlay"
+                rx.volume = -30
         if(name == "git"):
             if(state == True):
                 subprocess.call(['git pull'], shell=True)
