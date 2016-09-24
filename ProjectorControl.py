@@ -46,6 +46,7 @@ class device_handler(debounce_handler):
 
     def act(self, client_address, name, state):
         print "Name", name, "State", state, "from client @", client_address
+        rx = rxv.RXV("http://dentw04tc-c-107.dental.nyu.edu/YamahaRemoteControl/ctrl", "RX-A830")
         if(name == "projector"):
             if(state == True):
                 command = convertHex(OnCommand)
@@ -64,13 +65,11 @@ class device_handler(debounce_handler):
             elif(state == False):
                 print "Figure out what to do with this"
         if(name == "speakers"):
-            rx = rxv.RXV("http://dentw04tc-c-107.dental.nyu.edu/YamahaRemoteControl/ctrl", "RX-A830")
             if(state == True):
                 rx.on = True
             elif(state == False):
                 rx.on = False
         if(name == "input"):
-            rx = rxv.RXV("http://dentw04tc-c-107.dental.nyu.edu/YamahaRemoteControl/ctrl", "RX-A830")
             Inputs = [i for i in rx.inputs()]
             i = Inputs.index(rx.input)
             if(state == True):
