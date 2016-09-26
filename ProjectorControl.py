@@ -27,8 +27,8 @@ logging.basicConfig(level=logging.DEBUG)
 
 serialConnection = serial.Serial("/dev/ttyUSB0", 115200)
 global OnCommand, OffCommand
-OnCommand = "0614000400341100005D"
-OffCommand = "0614000400341101005E"
+OnCommand = "BEEF100500C6FF111101000100"
+OffCommand = "BEEF0206006DD2340000000000"
 
 def convertHex(command):
     output = ''
